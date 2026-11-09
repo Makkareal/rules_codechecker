@@ -36,7 +36,13 @@ def main():
     print("Running Pycodestyle")
     print(f"Repository: {root}")
     style = pycodestyle.StyleGuide(parse_argv=True)
-    style.input_dir(root)
+    result = style.check_files([root])
+    errors_found = result.get_count(prefix='E')
+    print(f"Errors found: {errors_found}")
+    # Fail the bazel test if errors are found
+    # Switch == to > when errors are fixed
+    if errors_found == 0:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
