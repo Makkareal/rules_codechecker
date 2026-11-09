@@ -40,8 +40,7 @@ def main():
     errors_found = result.get_count(prefix='E')
     print(f"Errors found: {errors_found}")
     # Fail the bazel test if errors are found
-    # Switch == to > when errors are fixed
-    if errors_found == 0:
+    if errors_found > 0:
         sys.exit(1)
 
 
